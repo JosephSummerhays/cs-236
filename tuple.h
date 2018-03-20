@@ -4,9 +4,8 @@
 
 using namespace std;
 
-class tuple {
+class tuple : public vector<string> {
 private:
-  vector<string> attributeValues;
 public:
   tuple(predicate tupleValues);
   string toStr();

@@ -2,7 +2,7 @@
 #include "relation.h"
 
 relation::relation(predicate schemaToAdd) {
-  name = schemaToAdd.id();
+  name = schemaToAdd.getId();
   head = new schema(schemaToAdd);
 }
 void relation::addTuple(predicate tupleToAdd) {
@@ -10,8 +10,8 @@ void relation::addTuple(predicate tupleToAdd) {
 }
 string relation::toStr() {
   string toReturn = head->toStr() + "\n";
-  for (int i = 0; i < tuples.size(); i++) {
-    toReturn += tuples.at(i)->toStr() + "\n";
+  for (unsigned int i = 0; i < tuples.size(); i++) {
+    toReturn += tuples.at(i).toStr() + "\n";
   }
   return toReturn;
 }

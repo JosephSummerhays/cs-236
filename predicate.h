@@ -13,6 +13,6 @@ public:
   void push(Param* pred);
   Param* getParam(int i);
   std::string toStr();
-  std::string id() { return id.getVal(); }
+  std::string getId() { return id.getVal(); }
   int size() { return parameters.size(); }
 };

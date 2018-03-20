@@ -9,4 +9,5 @@ private:
   vector<string> attributeNames;
 public:
   schema (predicate Schema);
+  string toStr();
 };
