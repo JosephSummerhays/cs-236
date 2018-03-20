@@ -2,6 +2,7 @@
 #include "charList.h"
 #include "Scanner.h"
 #include "dataLog.h"
+#include "database.h"
 #include "expressionParam.h"
 #include "tokenParam.h"
 #include "token.h"
@@ -14,10 +15,11 @@ int main (int argNum, char* args[]) {
   try {
     dataLoggicus.build();
     //cout << "Success!\n" << dataLoggicus.toStr();
+    database databasicus(dataLoggicus);
   } catch (string err) {
     cout << "Failure!" << endl;
     cout << "   " << err << endl;
   }
-  
+
   return 0;
 }

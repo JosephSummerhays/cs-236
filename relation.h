@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <set>
-#include <schema.h>
-#include <tuple.h>
+#include "schema.h"
+#include "tuple.h"
 
 using namespace std;
 
@@ -14,4 +14,5 @@ private:
 public:
   relation (predicate schemaToAdd);
   void addTuple(predicate tupleToAdd);
+  string toString();
 };

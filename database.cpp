@@ -11,3 +11,11 @@ database::database(dataLog data) {
     relations.push_back(temp);
   }
 }
+
+string database::toStr() {
+  string toReturn = "";
+  for (int i = 0; i < relations.size(); i++) {
+    toReturn += relations.at(i);
+  }
+  return toReturn;
+}

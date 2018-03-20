@@ -1,7 +1,7 @@
 #pragma once
-#include <dataLog.h>
+#include "dataLog.h"
 #include <vector>
-#include <relation.h>
+#include "relation.h"
 
 using namespace std;
 
@@ -10,4 +10,5 @@ private:
   vector<relation> relations;
 public:
   database(dataLog data);
+  string toStr();
 };
