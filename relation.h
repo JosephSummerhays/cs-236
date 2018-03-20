@@ -2,7 +2,7 @@
 #include <string>
 #include <set>
 #include "schema.h"
-#include "tuple.h"
+#include "Tuple.h"
 
 using namespace std;
 
@@ -10,7 +10,7 @@ class relation {
 private:
   string name;
   schema* head;
-  set<tuple> tuples;
+  set<Tuple> tuples;
 public:
   relation (predicate schemaToAdd);
   void addTuple(predicate tupleToAdd);
