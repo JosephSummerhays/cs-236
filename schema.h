@@ -1,4 +1,5 @@
 #pragma once
+#include "predicate.h"
 #include <vector>
 #include <string>
 

@@ -2,13 +2,13 @@
 
 using namespace std;
 
-tuple::tuple(predicate tupleValues) {
+Tuple::Tuple(predicate tupleValues) {
   for (unsigned int i = 0 i < Schema.size(); i++) {
     push_back(tupleValues.getParam(i)->toStr());
   }
 }
 
-string tuple::toStr() {
+string Tuple::toStr() {
   string toReturn = "";
   for (unsigned int i = 0; i < size(); i++) {
     toReturn += " " + at(i);

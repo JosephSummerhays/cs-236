@@ -1,4 +1,3 @@
-#pragma once
 #include "relation.h"
 
 relation::relation(predicate schemaToAdd) {

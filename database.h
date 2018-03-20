@@ -9,6 +9,7 @@ class database {
 private:
   vector<relation> relations;
 public:
-  database(dataLog data);
+  database(dataLog &data);
+  database() {};
   string toStr();
 };
