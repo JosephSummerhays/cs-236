@@ -44,6 +44,8 @@ public:
   string toStr();
   int getNumSchema() { return Schemes.size(); }
   int getNumFacts() { return Facts.size(); }
+  int getNumQueries() { return Queries.size(); }
   predicate schemaAt(int i) {return *(Schemes.at(i));}
   predicate factAt(int i) {return *(Facts.at(i));}
+  predicate queryAt(int i) {return *(Queries.at(i));}
 };

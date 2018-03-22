@@ -16,6 +16,7 @@ int main (int argNum, char* args[]) {
     dataLoggicus.build();
     //cout << "Success!\n" << dataLoggicus.toStr();
     database databasicus(dataLoggicus);
+    cout << databasicus.evaluate() << endl;
   } catch (string err) {
     cout << "Failure!" << endl;
     cout << "   " << err << endl;

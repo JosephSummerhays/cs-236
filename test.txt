@@ -1,15 +1,22 @@
 Schemes:
   SK(A,B)
+  BK(X,Y)
+  AMY(A,B,C,D,E,F)
 Facts:
   SK('a','c').
+  AMY('a','b','c','d','e','a').
   SK('b','c').
+  BK('a','w').
   SK('b','b').
+  AMY('c','b','c','d','e','c').
   SK('b','c').
+  BK('x','x').
 Rules:
 
 Queries:
   SK(A,'c')?
   SK('b','c')?
+  AMY(A,B,'c',D,E,A)?
   SK(X,X)?
   SK(A,B)?
   SK('c','c')?

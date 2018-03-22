@@ -165,6 +165,6 @@ Token* Scanner::top() {
   return tokenList.at(0);
 }
 void Scanner::pop() {
-  delete tokenList.at(0)
+  delete tokenList.at(0);
   tokenList.erase(tokenList.begin());
 }
