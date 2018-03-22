@@ -50,7 +50,7 @@ string query::eval(Tuple fact) {
       }
     }
   }
-  toReturn +=  "   ";
+  toReturn +=  "  ";
   for (map<string, string>::iterator it = paramsToConst.begin();
       it != paramsToConst.end(); it++) {
     toReturn += it->first + "=" + it->second + ", ";
