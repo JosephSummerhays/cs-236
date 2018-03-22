@@ -15,19 +15,7 @@ string query::toStr() {
   toReturn.pop_back();
   return toReturn+")? ";
 }
-/*
-SK(A,'c')? Yes(2)
-  A='a'
-  A='b'
-SK('b','c')? Yes(1)
-SK(X,X)? Yes(1)
-  X='b'
-SK(A,B)? Yes(3)
-  A='a', B='c'
-  A='b', B='b'
-  A='b', B='c'
-SK('c','c')? No
-*/
+
 string query::eval(Tuple fact) {
   string toReturn = "";
   if (params.size() != fact.size()) {
@@ -51,9 +39,14 @@ string query::eval(Tuple fact) {
     }
   }
   toReturn +=  "  ";
-  for (map<string, string>::iterator it = paramsToConst.begin();
-      it != paramsToConst.end(); it++) {
-    toReturn += it->first + "=" + it->second + ", ";
+  // for (map<string, string>::iterator it = paramsToConst.begin();
+  //     it != paramsToConst.end(); it++) {
+  //   toReturn += it->first + "=" + it->second + ", ";
+  // }
+  for (unsigned int i = 0; i < params.size(); i++) {
+    if (params.at(i).at(0) != '\'') {
+      toReturn += params.at(i) + "=" + paramsToConst[params.at(i)] + ", ";
+    }
   }
   toReturn.pop_back();
   toReturn.pop_back();
