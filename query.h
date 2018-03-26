@@ -10,7 +10,11 @@ using namespace std;
 class query {
 private:
   vector<string> params;
+  vector<string> unique;
   string name;
+  void setUnique();
+  bool alreadyUnique(string tofind);
+  bool matches(map<string,string> &paramsToConst, Tuple fact);
 public:
   query() {}
   query(predicate q);

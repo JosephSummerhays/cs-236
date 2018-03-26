@@ -8,7 +8,9 @@ using namespace std;
 
 class Tuple : public vector<string> {
 private:
+  Tuple(){ }
 public:
   Tuple(predicate tupleValues);
+  Tuple project(vector<int> col);
   string toStr() const;
 };

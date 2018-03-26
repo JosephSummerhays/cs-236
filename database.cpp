@@ -63,5 +63,9 @@ string database::evaluate() {
   for (unsigned int i = 0; i < queries.size(); i++) {
     toReturn += evaluate(i);
   }
+  cout << "******** testing select function **********" << endl;
+  cout << relations.at(0).toStr() << endl;
+  vector<int> projectionCol = {1,2};
+  cout << relations.at(0).project(projectionCol).toStr() << endl;
   return toReturn;
 }

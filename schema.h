@@ -13,4 +13,5 @@ public:
   schema() {}
   void set(predicate Schema);
   string toStr();
+  schema project(vector<int> col);
 };

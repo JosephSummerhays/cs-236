@@ -15,3 +15,10 @@ string schema::toStr() {
   }
   return toReturn;
 }
+schema schema::project(vector<int> col) {
+  schema toReturn;
+  for (int i = 0; i < col.size(); i++) {
+    toReturn.push_back(attributeNames.at(col.at(i)));
+  }
+  return toReturn;
+}
