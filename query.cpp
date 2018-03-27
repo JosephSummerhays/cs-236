@@ -37,7 +37,7 @@ string query::toStr() {
 bool query::matches(map<string,string> &paramsToConst,Tuple fact) {
   for (unsigned int i = 0; i < params.size(); i++) {
     if (params.at(i).at(0) != '\'') {
-      if (paramsToConst.find(params.at(i))==paramsToConst.end()) { /*if we don't find it*/
+      if (paramsToConst.find(params.at(i))==paramsToConst.end()) { //if we don't find it
         paramsToConst[params.at(i)] = fact.at(i);
         continue;
       }
@@ -81,4 +81,8 @@ string query::eval(Tuple fact) {
 
 vector<int> query::getProjections() {
   ///*********************also here!!!!!!!!!!!!!
+  //I've become suspicious that this select project version isn't actually faster
+  //I'm going to attempt to do project 4 without select project or rename.
+  vector<int> nothing;
+  return nothing;
 }

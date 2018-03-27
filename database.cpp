@@ -41,12 +41,12 @@ int count(char c, string toCount) {
 string database::evaluate(int i) {
   string query = queries.at(i).toStr();
   string answers = "";
-  vector<int> projections;
-  vector<string> selections;
-  for (unsigned int j = 0; j < queries.size(); j++) {
-    if (que)//HERE!!!!!!!!!!!!!!!!!!!!!!
-  }
-  /*for (unsigned int j = 0; j < relations.size(); j++){
+  // vector<int> projections;
+  // vector<string> selections;
+  // for (unsigned int j = 0; j < queries.size(); j++) {
+  //   if (que)//HERE!!!!!!!!!!!!!!!!!!!!!!
+  // }
+  for (unsigned int j = 0; j < relations.size(); j++){
     if (queries.at(i).Name() == relations.at(j).Name()) {
       for (int k = 0; k < relations.at(j).size(); k++) {
         answers += queries.at(i).eval(relations.at(j).at(k));
@@ -59,7 +59,7 @@ string database::evaluate(int i) {
       }
       break;
     }
-  }*/
+  }
   return query + answers;
 }
 
@@ -68,9 +68,9 @@ string database::evaluate() {
   for (unsigned int i = 0; i < queries.size(); i++) {
     toReturn += evaluate(i);
   }
-  cout << "******** testing select function **********" << endl;
-  cout << relations.at(0).toStr() << endl;
-  vector<int> projectionCol = {1,2};
-  cout << relations.at(0).project(projectionCol).toStr() << endl;
+  // cout << "******** testing select function **********" << endl;
+  // cout << relations.at(0).toStr() << endl;
+  // vector<int> projectionCol = {1,2};
+  // cout << relations.at(0).project(projectionCol).toStr() << endl;
   return toReturn;
 }
