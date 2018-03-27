@@ -17,8 +17,8 @@ string schema::toStr() {
 }
 schema schema::project(vector<int> col) {
   schema toReturn;
-  for (int i = 0; i < col.size(); i++) {
-    toReturn.push_back(attributeNames.at(col.at(i)));
+  for (unsigned int i = 0; i < col.size(); i++) {
+    toReturn.attributeNames.push_back(attributeNames.at(col.at(i)));
   }
   return toReturn;
 }

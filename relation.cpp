@@ -44,8 +44,8 @@ relation relation::select(string val, int col) {
 relation relation::project(vector<int> col) {
   relation toReturn(head.project(col));
   for (set<Tuple>:: iterator it = tuples.begin(); it != tuples.end(); it++) {
-    Tuple temp = it->project(col);
-    toReturn.addTuple(temp);
+    Tuple temp = (*it);
+    toReturn.addTuple(temp.project(col));
   }
   return toReturn;
 }

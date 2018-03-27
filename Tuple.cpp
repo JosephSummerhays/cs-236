@@ -18,7 +18,7 @@ string Tuple::toStr() const{
 
 Tuple Tuple::project(vector<int> col) {
   Tuple toReturn;
-  for (int i = 0; i < col.size(); i++) {
+  for (unsigned int i = 0; i < col.size(); i++) {
     toReturn.push_back(at(col.at(i)));
   }
   return toReturn;
