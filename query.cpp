@@ -78,3 +78,7 @@ string query::eval(Tuple fact) {
   toReturn.pop_back();
   return toReturn + "\n";
 }
+
+vector<int> query::getProjections() {
+  ///*********************also here!!!!!!!!!!!!!
+}

@@ -20,5 +20,6 @@ public:
   query(predicate q);
   string toStr();
   string eval(Tuple fact);
+  vector<int> getProjections();
   string Name() { return name; }
 };
