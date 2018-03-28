@@ -45,7 +45,9 @@ public:
   int getNumSchema() { return Schemes.size(); }
   int getNumFacts() { return Facts.size(); }
   int getNumQueries() { return Queries.size(); }
+  int getNumRules() { return Rules.size(); }
   predicate schemaAt(int i) {return *(Schemes.at(i));}
   predicate factAt(int i) {return *(Facts.at(i));}
   predicate queryAt(int i) {return *(Queries.at(i));}
+  rule ruleAt(int i) {return *(Rules.at(i));}
 };

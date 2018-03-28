@@ -12,4 +12,5 @@ public:
   void push(predicate* toPush);
   vector<predicate*>& getPredList();
   std::string toStr();
+  predicate getHead() {return (*headpred);}
 };

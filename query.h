@@ -19,7 +19,8 @@ public:
   query() {}
   query(predicate q);
   string toStr();
-  string eval(Tuple fact);
+  bool eval(Tuple fact);
+  vector<string> getParams() { return params; }
   vector<int> getProjections();
   string Name() { return name; }
 };

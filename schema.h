@@ -12,6 +12,8 @@ private:
 public:
   schema() {}
   void set(predicate Schema);
+  void set(vector<string> Schema);
+  string at(int i) { return attributeNames.at(i); }
   string toStr();
   schema project(vector<int> col);
 };

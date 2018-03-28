@@ -8,6 +8,10 @@ void schema::set(predicate Schema) {
   }
 }
 
+void schema::set(vector<string> Schema) {
+  attributeNames = Schema;
+}
+
 string schema::toStr() {
   string toReturn = "";
   for (unsigned int i = 0; i < attributeNames.size(); i++) {

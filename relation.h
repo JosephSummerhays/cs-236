@@ -9,6 +9,7 @@ using namespace std;
 
 class relation {
 private:
+  vector<string> unique;
   string name;
   schema head;
   set<Tuple> tuples;
@@ -16,6 +17,9 @@ private:
   void addTuple (Tuple tupleToAdd);
 public:
   relation (predicate schemaToAdd);
+  relation (schema head) { this->head = head; }
+  relation (vector<string> head) { this->head.set(head); }
+  schema getHead() { return head; }
   void addTuple(predicate tupleToAdd);
   string toStr();
   string Name() { return name; }

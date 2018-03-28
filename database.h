@@ -2,6 +2,7 @@
 #include "dataLog.h"
 #include "relation.h"
 #include "query.h"
+#include "Rule.h"
 #include <vector>
 #include <iostream>
 
@@ -11,6 +12,7 @@ class database {
 private:
   vector<relation> relations;
   vector<query> queries;
+  vector<Rule> rules;
   string evaluate(int i);
 public:
   database(dataLog &data);

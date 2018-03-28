@@ -15,6 +15,9 @@ database::database(dataLog &data) {
     query temp(data.queryAt(i));
     queries.push_back(temp);
   }
+  for (int i = 0; i < data.getNumRules(); i++) {
+    rules.push_back(Rule(/*To be determined!!!!*/));
+  }
 }
 
 string database::toStr() {
@@ -39,8 +42,8 @@ int count(char c, string toCount) {
 }
 
 string database::evaluate(int i) {
-  string query = queries.at(i).toStr();
-  string answers = "";
+  /*
+  // string answers = "";
   // vector<int> projections;
   // vector<string> selections;
   // for (unsigned int j = 0; j < queries.size(); j++) {
@@ -48,19 +51,45 @@ string database::evaluate(int i) {
   // }
   for (unsigned int j = 0; j < relations.size(); j++){
     if (queries.at(i).Name() == relations.at(j).Name()) {
+      relation toReturn(relations.at(j).getHead());
       for (int k = 0; k < relations.at(j).size(); k++) {
-        answers += queries.at(i).eval(relations.at(j).at(k));
+        if (queries.at(i).eval(relations.at(j).at(k))) {
+          toReturn.addTuple(relations.at(j).at(k));
+        }
       }
-      if (count('\n', answers) != 0) {
-        query += "Yes(" + to_string(count('\n', answers)) + ")\n";
+      // if (count('\n', answers) != 0) {
+      //   query += "Yes(" + to_string(count('\n', answers)) + ")\n";
+      // }
+      // else {
+      //   query += "No\n";
+      // }
+      return toReturn;
+      // break;
+    }
+  }*/
+  string q = queries.at(i).toStr();
+  relation r = evaluate(queries.at(i));
+  if (r.size() > 0) {
+    q += "Yes(" + to_string(r.size()) + ")\n";
+  }
+  else {
+    q += "No\n";
+  }
+  return q + r.toStr();
+}
+
+relation database::evaluate(query q) {
+  for (unsigned int j = 0; j < relations.size(); j++){
+    if (q.Name() == relations.at(j).Name()) {
+      relation toReturn(q.getParams());
+      for (int k = 0; k < relations.at(j).size(); k++) {
+        if (q.eval(relations.at(j).at(k))) {
+          toReturn.addTuple(relations.at(j).at(k));
+        }
       }
-      else {
-        query += "No\n";
-      }
-      break;
+      return toReturn;
     }
   }
-  return query + answers;
 }
 
 string database::evaluate() {

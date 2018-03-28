@@ -54,20 +54,20 @@ bool query::matches(map<string,string> &paramsToConst,Tuple fact) {
   return true;
 }
 
-string query::eval(Tuple fact) {
-  string toReturn = "";
+bool query::eval(Tuple fact) {
   if (params.size() != fact.size()) {
-    return toReturn;
+    return false;
   }
   map<string,string> paramsToConst;
   if(!matches(paramsToConst, fact)) {
-    return toReturn;
+    return false;
   }
-  toReturn +=  "  ";
+  return true;
   // for (map<string, string>::iterator it = paramsToConst.begin();
   //     it != paramsToConst.end(); it++) {
   //   toReturn += it->first + "=" + it->second + ", ";
   // }
+  /*
   string found = "";
   for (unsigned int i = 0; i < unique.size(); i++) {
     if (unique.at(i).at(0) != '\'') {
@@ -76,7 +76,7 @@ string query::eval(Tuple fact) {
   }
   toReturn.pop_back();
   toReturn.pop_back();
-  return toReturn + "\n";
+  return toReturn + "\n";*/
 }
 
 vector<int> query::getProjections() {
