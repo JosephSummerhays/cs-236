@@ -25,9 +25,9 @@ Rules:
     g(E,F) :- f(E,X),r(X,F).
 
 Queries:
-    f('3',Z, A)?
+    f('3',Z)?
     r(Y,'3')?
-    f(X,W, X)?
+    f(X, X)?
     HEY(X,B,'n',B,X)?
     HEY(X,B,'n',Y,X)?
     HEY(X,B,'n',L,Z)?

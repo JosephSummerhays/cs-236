@@ -19,8 +19,9 @@ bool query::alreadyUnique(string tofind) {
 
 void query::setUnique() {
   for (unsigned int i = 0; i < params.size(); i++) {
-    if (!alreadyUnique(params.at(i))) {
+    if (!alreadyUnique(params.at(i))&& params.at(i).at(0) != '\'') {
       unique.push_back(params.at(i));
+      toProject.push_back(i);
     }
   }
 }
@@ -77,12 +78,4 @@ bool query::eval(Tuple fact) {
   toReturn.pop_back();
   toReturn.pop_back();
   return toReturn + "\n";*/
-}
-
-vector<int> query::getProjections() {
-  ///*********************also here!!!!!!!!!!!!!
-  //I've become suspicious that this select project version isn't actually faster
-  //I'm going to attempt to do project 4 without select project or rename.
-  vector<int> nothing;
-  return nothing;
 }

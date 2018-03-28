@@ -9,13 +9,11 @@ using namespace std;
 
 class relation {
 private:
-  vector<string> unique;
   string name;
   schema head;
   set<Tuple> tuples;
-  relation (schema head) { this->head = head; }
-  void addTuple (Tuple tupleToAdd);
 public:
+  void addTuple (Tuple tupleToAdd);
   relation (predicate schemaToAdd);
   relation (schema head) { this->head = head; }
   relation (vector<string> head) { this->head.set(head); }
@@ -25,7 +23,7 @@ public:
   string Name() { return name; }
   int size() { return tuples.size(); }
   Tuple at(int i);
-  relation select(int col1, int col2);
-  relation select(string val, int col);
+  // relation select(int col1, int col2);
+  // relation select(string val, int col);
   relation project(vector<int> col);
 };

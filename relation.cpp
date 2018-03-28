@@ -12,10 +12,20 @@ void relation::addTuple(Tuple tupleToAdd) {
 }
 
 string relation::toStr() {
-  string toReturn = head.toStr() + "\n";
+  string toReturn = "";
   for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-    toReturn += it->toStr() + "\n";
+    toReturn += "   ";
+    for (unsigned int i = 0; i < it->size(); i++) {
+      toReturn += head.at(i) + "=" + it->at(i) + ", ";
+    }
+    toReturn.pop_back();
+    toReturn.pop_back();
+    toReturn += "\n";
   }
+  // string toReturn = head.toStr() + "\n";
+  // for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
+  //   toReturn += it->toStr() + "\n";
+  // }
   return toReturn;
 }
 
@@ -25,24 +35,24 @@ Tuple relation::at(int i) {
   return *it;
 }
 
-relation relation::select(int col1, int col2) {
-  relation toReturn(head);
-  for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-    if (it->at(col1) == it->at(col2)) {
-      toReturn.addTuple((*it));
-    }
-  }
-  return toReturn;
-}
-relation relation::select(string val, int col) {
-  relation toReturn(head);
-  for (set<Tuple>:: iterator it = tuples.begin(); it != tuples.end(); it++) {
-    if (it->at(col) == val) {
-      toReturn.addTuple(*it);
-    }
-  }
-  return toReturn;
-}
+// relation relation::select(int col1, int col2) {
+//   relation toReturn(head);
+//   for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
+//     if (it->at(col1) == it->at(col2)) {
+//       toReturn.addTuple((*it));
+//     }
+//   }
+//   return toReturn;
+// }
+// relation relation::select(string val, int col) {
+//   relation toReturn(head);
+//   for (set<Tuple>:: iterator it = tuples.begin(); it != tuples.end(); it++) {
+//     if (it->at(col) == val) {
+//       toReturn.addTuple(*it);
+//     }
+//   }
+//   return toReturn;
+// }
 relation relation::project(vector<int> col) {
   relation toReturn(head.project(col));
   for (set<Tuple>:: iterator it = tuples.begin(); it != tuples.end(); it++) {
@@ -50,21 +60,4 @@ relation relation::project(vector<int> col) {
     toReturn.addTuple(temp.project(col));
   }
   return toReturn;
-}
-
-bool relation::alreadyUnique(string tofind) {
-  for (unsigned int i = 0; i < unique.size(); i++) {
-    if (unique.at(i) == tofind) {
-      return true;
-    }
-  }
-  return false;
-}
-
-void relation::setUnique() {
-  for (unsigned int i = 0; i < head.size(); i++) {
-    if (!alreadyUnique(head.at(i))) {
-      unique.push_back(head.at(i));//HERE!!!!!!!!!!!!!!!!!!!!!
-    }
-  }
 }

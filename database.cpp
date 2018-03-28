@@ -15,9 +15,10 @@ database::database(dataLog &data) {
     query temp(data.queryAt(i));
     queries.push_back(temp);
   }
+  /*
   for (int i = 0; i < data.getNumRules(); i++) {
-    rules.push_back(Rule(/*To be determined!!!!*/));
-  }
+    rules.push_back(Rule(To be determined!!!!));
+  }*/
 }
 
 string database::toStr() {
@@ -84,12 +85,15 @@ relation database::evaluate(query q) {
       relation toReturn(q.getParams());
       for (int k = 0; k < relations.at(j).size(); k++) {
         if (q.eval(relations.at(j).at(k))) {
-          toReturn.addTuple(relations.at(j).at(k));
+          toReturn.addTuple(relations.at(j).at(k).project(q.getProjections()));
         }
       }
       return toReturn;
     }
   }
+  cout << "Some kinda error, shouldn't have ever gotten this far in database::evaluate(query q)";
+  relation toReturn(q.getParams());
+  return toReturn;
 }
 
 string database::evaluate() {

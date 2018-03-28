@@ -13,6 +13,7 @@ private:
   vector<relation> relations;
   vector<query> queries;
   vector<Rule> rules;
+  relation evaluate(query q);
   string evaluate(int i);
 public:
   database(dataLog &data);

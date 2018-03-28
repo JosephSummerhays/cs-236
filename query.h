@@ -11,6 +11,7 @@ class query {
 private:
   vector<string> params;
   vector<string> unique;
+  vector<int> toProject;
   string name;
   void setUnique();
   bool alreadyUnique(string tofind);
@@ -20,7 +21,7 @@ public:
   query(predicate q);
   string toStr();
   bool eval(Tuple fact);
-  vector<string> getParams() { return params; }
-  vector<int> getProjections();
+  vector<string> getParams() { return unique; }
+  vector<int> getProjections() { return toProject; }
   string Name() { return name; }
 };
