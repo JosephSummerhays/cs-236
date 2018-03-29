@@ -15,8 +15,9 @@ void schema::set(vector<string> Schema) {
 string schema::toStr() {
   string toReturn = "";
   for (unsigned int i = 0; i < attributeNames.size(); i++) {
-    toReturn += " " +attributeNames.at(i);
+    toReturn += attributeNames.at(i)+ ",";
   }
+  toReturn.pop_back();
   return toReturn;
 }
 schema schema::project(vector<int> col) {

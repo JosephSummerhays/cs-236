@@ -10,7 +10,11 @@ Rule::Rule(rule toConstruct) {
 string Rule::toStr() {
   string prems = "";
   for (unsigned int i = 0; i < premises.size(); i++) {
-    prems += premises.at(i).toStr() + "\n";
+    prems += premises.at(i).toStr();
+    prems.pop_back();
+    prems.pop_back();
+    prems += ",";
   }
-  return conclusionName + "(" + conclusion.toStr() + "):-\n" + prems;
+  prems.pop_back();
+  return conclusionName + "(" + conclusion.toStr() + ") :- " + prems;
 }

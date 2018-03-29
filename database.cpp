@@ -106,7 +106,7 @@ string database::evaluate() {
       totaldifference += relations.at(i).size();
     }
     for (unsigned int i = 0; i < rules.size(); ++i) {
-      cout << rules.at(i).toStr();
+      cout << rules.at(i).toStr() << endl;
       getConclusion(i);
     }
     for (unsigned int i = 0; i < relations.size(); i++){
