@@ -125,9 +125,7 @@ string database::evaluate() {
 
 void database::getConclusion(int i) {
   relation conclusions = evaluate(rules.at(i).premiseAt(0));
-  relation toPrint(rules.at(i).Conclusion());
   for (int j = 1; j < rules.at(i).size(); ++j) {
-    //cout << endl << "NEW JOIN CALL ***" << rules.at(i).toStr() << endl;
     conclusions.join(evaluate(rules.at(i).premiseAt(j)));
   }
   /*
@@ -136,7 +134,7 @@ void database::getConclusion(int i) {
   */
   for (unsigned int j = 0; j < relations.size(); j++){
     if (relations.at(j).Name() == rules.at(i).name()) {
-      //cout << "old relation -- " << relations.at(j).toStr() << endl;
+      relation toPrint(relations.at(j).getHead());
       map<string,int> m;
       vector<int> toProject;
       for (int k = 0; k < conclusions.getHead().size(); ++k) {
@@ -148,10 +146,9 @@ void database::getConclusion(int i) {
       for (int k = 0; k < conclusions.size(); k++) {
         Tuple tmp = conclusions.at(k).project(toProject);
         toPrint.addTuple(tmp);
-        relations.at(j).addTuple(tmp);
       }
-      cout << toPrint.toStr() << endl;
-      //cout << "new relation -- " << relations.at(j).toStr() << endl;
+      cout << toPrint.setDifference(relations.at(j)).toStr();
+      relations.at(j).addSet(toPrint);
       break;
     }
   }

@@ -5,6 +5,7 @@
 #include "Tuple.h"
 #include <iostream>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -28,4 +29,6 @@ public:
   // relation select(string val, int col);
   relation project(vector<int> col);
   void join(relation toJoin);
+  relation setDifference(relation toSubtract);
+  void addSet(relation toAdd);
 };

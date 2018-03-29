@@ -14,7 +14,7 @@ void relation::addTuple(Tuple tupleToAdd) {
 string relation::toStr() {
   string toReturn = "";
   for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
-    toReturn += "   ";
+    toReturn += "  ";
     for (unsigned int i = 0; i < it->size(); i++) {
       toReturn += head.at(i) + "=" + it->at(i) + ", ";
     }
@@ -99,4 +99,18 @@ void relation::join(relation toJoin) {
   // }
   tuples = toReplace;
   head.join(toJoin.getHead());
+}
+
+relation relation::setDifference(relation toSubtract) {
+  relation toReturn(head);
+  set<Tuple> toReplace;
+  set_difference(tuples.begin(), tuples.end(),
+    toSubtract.tuples.begin(), toSubtract.tuples.end(),
+    inserter(toReplace, toReplace.end()));
+  toReturn.tuples = toReplace;
+  return toReturn;
+}
+
+void relation::addSet(relation toAdd) {
+  tuples.insert(toAdd.tuples.begin(),toAdd.tuples.end());
 }
