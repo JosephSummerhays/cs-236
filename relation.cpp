@@ -61,3 +61,42 @@ relation relation::project(vector<int> col) {
   }
   return toReturn;
 }
+
+bool joinable(Tuple& t1, Tuple t2, schema s1, schema s2) {
+  map<string,int> m;
+  for (int i = 0; i < s1.size(); i++){
+    m[s1.at(i)] = i;
+  }
+  for (int i = 0; i < s2.size(); i++) {
+    if(m.find(s2.at(i)) != m.end()) {
+      if (t2.at(i) != t1.at(m[s2.at(i)])) {
+        return false;
+      }
+    }
+    else {
+      t1.push_back(t2.at(i));
+    }
+  }
+  return true;
+}
+
+void relation::join(relation toJoin) {
+  set<Tuple> toReplace;
+
+  for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
+    for (int i = 0; i < toJoin.size(); i++){
+      Tuple tmp = (*it);
+      //cout << tmp.toStr() << " + " << toJoin.at(i).toStr() << " -> ";
+      if (joinable(tmp, toJoin.at(i), head, toJoin.getHead())) {
+        toReplace.insert(tmp);
+        //cout << tmp.toStr();
+      }
+      //cout << endl;
+    }
+  }
+  // for (set<Tuple>::iterator it = toReplace.begin(); it != toReplace.end(); it++) {
+  //   cout << it->toStr() << endl;
+  // }
+  tuples = toReplace;
+  head.join(toJoin.getHead());
+}

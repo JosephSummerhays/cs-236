@@ -1,14 +1,20 @@
 #pragma once
+#include "query.h"
 #include "rule.h"
 #include "schema.h"
-#include "query.h"
 
 using namespace std;
 
 class Rule {
-public:
-  Rule(rule toCopy);
 private:
-  schema conclusion;
+  string conclusionName;
   vector<query> premises;
+  schema conclusion;
+public:
+  Rule(rule toConstruct);
+  string toStr();
+  int size(){ return premises.size(); }
+  query premiseAt(int i) { return premises.at(i); }
+  string name() { return conclusionName; }
+  schema Conclusion() { return conclusion; }
 };

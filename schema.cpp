@@ -26,3 +26,14 @@ schema schema::project(vector<int> col) {
   }
   return toReturn;
 }
+void schema::join(schema toJoin) {
+  map<string,int> m;
+  for (unsigned int i = 0; i < attributeNames.size(); i++){
+    m[attributeNames.at(i)] = i;
+  }
+  for (int i = 0; i < toJoin.size(); i++) {
+    if(m.find(toJoin.at(i)) == m.end()) {
+      attributeNames.push_back(toJoin.at(i));
+    }
+  }
+}

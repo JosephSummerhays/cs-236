@@ -11,14 +11,14 @@ database::database(dataLog &data) {
     relations.push_back(temp);
   }
   for (int i = 0; i < data.getNumQueries(); i++) {
-    //TO DO add Queries
+
     query temp(data.queryAt(i));
     queries.push_back(temp);
   }
-  /*
+
   for (int i = 0; i < data.getNumRules(); i++) {
-    rules.push_back(Rule(To be determined!!!!));
-  }*/
+    rules.push_back(Rule(data.ruleAt(i)));
+  }
 }
 
 string database::toStr() {
@@ -97,13 +97,62 @@ relation database::evaluate(query q) {
 }
 
 string database::evaluate() {
+  cout << "Rule Evaluation" << endl;
+  int totaldifference;
+  int passes = 0;
+  do {
+    totaldifference = 0;
+    for (unsigned int i = 0; i < relations.size(); i++){
+      totaldifference += relations.at(i).size();
+    }
+    for (unsigned int i = 0; i < rules.size(); ++i) {
+      cout << rules.at(i).toStr();
+      getConclusion(i);
+    }
+    for (unsigned int i = 0; i < relations.size(); i++){
+      totaldifference -= relations.at(i).size();
+    }
+    passes++;
+  } while (totaldifference != 0);
+  cout << endl <<  "Schemes populated after " << passes << " passes through the Rules." << endl;
+  cout << endl << "Query Evaluation" << endl;
   string toReturn = "";
   for (unsigned int i = 0; i < queries.size(); i++) {
     toReturn += evaluate(i);
   }
-  // cout << "******** testing select function **********" << endl;
-  // cout << relations.at(0).toStr() << endl;
-  // vector<int> projectionCol = {1,2};
-  // cout << relations.at(0).project(projectionCol).toStr() << endl;
   return toReturn;
+}
+
+void database::getConclusion(int i) {
+  relation conclusions = evaluate(rules.at(i).premiseAt(0));
+  relation toPrint(rules.at(i).Conclusion());
+  for (int j = 1; j < rules.at(i).size(); ++j) {
+    //cout << endl << "NEW JOIN CALL ***" << rules.at(i).toStr() << endl;
+    conclusions.join(evaluate(rules.at(i).premiseAt(j)));
+  }
+  /*
+  for each tuple in conclusions
+    push_back a tuple into the relation matching conclusionName;
+  */
+  for (unsigned int j = 0; j < relations.size(); j++){
+    if (relations.at(j).Name() == rules.at(i).name()) {
+      //cout << "old relation -- " << relations.at(j).toStr() << endl;
+      map<string,int> m;
+      vector<int> toProject;
+      for (int k = 0; k < conclusions.getHead().size(); ++k) {
+        m[conclusions.getHead().at(k)] = k;
+      }
+      for (int k = 0; k < rules.at(i).Conclusion().size(); k++) {
+        toProject.push_back(m[rules.at(i).Conclusion().at(k)]);
+      }
+      for (int k = 0; k < conclusions.size(); k++) {
+        Tuple tmp = conclusions.at(k).project(toProject);
+        toPrint.addTuple(tmp);
+        relations.at(j).addTuple(tmp);
+      }
+      cout << toPrint.toStr() << endl;
+      //cout << "new relation -- " << relations.at(j).toStr() << endl;
+      break;
+    }
+  }
 }

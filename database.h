@@ -15,6 +15,7 @@ private:
   vector<Rule> rules;
   relation evaluate(query q);
   string evaluate(int i);
+  void getConclusion(int i);
 public:
   database(dataLog &data);
   database() {}

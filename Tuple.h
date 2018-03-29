@@ -11,6 +11,6 @@ private:
   Tuple(){ }
 public:
   Tuple(predicate tupleValues);
-  Tuple project(vector<int> col);
+  Tuple project(vector<int> colToKeep);
   string toStr() const;
 };

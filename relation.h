@@ -4,6 +4,7 @@
 #include "schema.h"
 #include "Tuple.h"
 #include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -26,4 +27,5 @@ public:
   // relation select(int col1, int col2);
   // relation select(string val, int col);
   relation project(vector<int> col);
+  void join(relation toJoin);
 };
