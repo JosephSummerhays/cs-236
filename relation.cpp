@@ -29,7 +29,7 @@ string relation::toStr() {
   return toReturn;
 }
 
-Tuple relation::at(int i) {
+Tuple relation::at(int i) const {
   set<Tuple>::iterator it = tuples.begin();
   advance(it, i);
   return *it;
@@ -44,15 +44,15 @@ Tuple relation::at(int i) {
 //   }
 //   return toReturn;
 // }
-// relation relation::select(string val, int col) {
-//   relation toReturn(head);
-//   for (set<Tuple>:: iterator it = tuples.begin(); it != tuples.end(); it++) {
-//     if (it->at(col) == val) {
-//       toReturn.addTuple(*it);
-//     }
-//   }
-//   return toReturn;
-// }
+relation relation::select(string val, int col) {
+  relation toReturn(head);
+  for (set<Tuple>:: iterator it = tuples.begin(); it != tuples.end(); it++) {
+    if (it->at(col) == val) {
+      toReturn.addTuple(*it);
+    }
+  }
+  return toReturn;
+}
 relation relation::project(vector<int> col) {
   relation toReturn(head.project(col));
   for (set<Tuple>:: iterator it = tuples.begin(); it != tuples.end(); it++) {
@@ -80,23 +80,29 @@ bool joinable(Tuple& t1, Tuple t2, schema s1, schema s2) {
   return true;
 }
 
-void relation::join(relation toJoin) {
+void relation::join(const relation& toJoin) {
   set<Tuple> toReplace;
 
   for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end(); it++) {
+    /*
+    map<string,int> m;
+    for (int i = 0; i < s1.size(); i++){
+      m[it->at(i)] = i;
+    }
+    relation tmp = toJoin;
+    for () {
+
+    }*/
     for (int i = 0; i < toJoin.size(); i++){
       Tuple tmp = (*it);
-      //cout << tmp.toStr() << " + " << toJoin.at(i).toStr() << " -> ";
       if (joinable(tmp, toJoin.at(i), head, toJoin.getHead())) {
         toReplace.insert(tmp);
-        //cout << tmp.toStr();
       }
-      //cout << endl;
     }
   }
-  // for (set<Tuple>::iterator it = toReplace.begin(); it != toReplace.end(); it++) {
-  //   cout << it->toStr() << endl;
-  // }
+  for (set<Tuple>::iterator it = toReplace.begin(); it != toReplace.end(); it++) {
+    cout << it->toStr() << endl;
+  }
   tuples = toReplace;
   head.join(toJoin.getHead());
 }

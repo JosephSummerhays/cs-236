@@ -5,6 +5,7 @@
 #include "Rule.h"
 #include <vector>
 #include <iostream>
+#include "funcMeasure.h"
 
 using namespace std;
 
