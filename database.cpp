@@ -124,8 +124,8 @@ string database::evaluate() {
 }
 
 void database::getConclusion(int i) {
-  funcMeasure f1("getConclusion " + to_string(i) + "part one");
-  funcMeasure f2("getConclusion " + to_string(i) + "part two");
+  funcMeasure f1("getConclusion " + to_string(i) + " part one");
+  funcMeasure f2("getConclusion " + to_string(i) + " part two");
   f1.flag();
   relation conclusions = evaluate(rules.at(i).premiseAt(0));
   for (int j = 1; j < rules.at(i).size(); ++j) {
@@ -141,7 +141,7 @@ void database::getConclusion(int i) {
   for (unsigned int j = 0; j < relations.size(); j++){
     if (relations.at(j).Name() == rules.at(i).name()) {
 
-      relation toPrint(relations.at(j).getHead());
+      relation toPrint;
       map<string,int> m;
       vector<int> toProject;
       for (int k = 0; k < conclusions.getHead().size(); ++k) {
@@ -155,9 +155,9 @@ void database::getConclusion(int i) {
       //   Tuple tmp = conclusions.at(k).project(toProject);
       //   toPrint.addTuple(tmp);
       // }
-      toPrint =
-
-      //cout << toPrint.setDifference(relations.at(j)).toStr();
+      toPrint = conclusions.project(toProject);
+      toPrint.setHead(relations.at(j).getHead());
+      //cout << toPrint.setDifference(relations.at(j)).toStr();     //UNCOMMENT ME FOR FULL PRODUCTION!!!
       f2.flag();
       relations.at(j).addSet(toPrint);
       f2.flag();

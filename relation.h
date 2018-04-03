@@ -16,6 +16,7 @@ private:
   set<Tuple> tuples;
 public:
   void addTuple (Tuple tupleToAdd);
+  relation () {}
   relation (predicate schemaToAdd);
   relation (schema head) { this->head = head; }
   relation (vector<string> head) { this->head.set(head); }
@@ -31,4 +32,5 @@ public:
   void join(const relation& toJoin);
   relation setDifference(relation toSubtract);
   void addSet(relation toAdd);
+  void setHead(schema newHead) { head = newHead; }
 };

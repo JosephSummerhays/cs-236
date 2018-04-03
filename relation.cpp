@@ -100,9 +100,9 @@ void relation::join(const relation& toJoin) {
       }
     }
   }
-  for (set<Tuple>::iterator it = toReplace.begin(); it != toReplace.end(); it++) {
-    cout << it->toStr() << endl;
-  }
+  // for (set<Tuple>::iterator it = toReplace.begin(); it != toReplace.end(); it++) {
+  //   cout << it->toStr() << endl;
+  // }
   tuples = toReplace;
   head.join(toJoin.getHead());
 }
