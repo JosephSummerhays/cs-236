@@ -97,6 +97,11 @@ relation database::evaluate(query q) {
 }
 
 string database::evaluate() {
+  cout << "************ TESTING GRAPH CONSTRUCTOR ***********" << endl;
+  graph graphicus(rules);
+  cout << graphicus.ToString() << endl;
+  graphicus.findSCC();
+
   cout << "Rule Evaluation" << endl;
   int totaldifference;
   int passes = 0;

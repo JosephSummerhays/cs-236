@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include "funcMeasure.h"
+#include "graph.h"
 
 using namespace std;
 

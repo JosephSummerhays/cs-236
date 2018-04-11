@@ -13,8 +13,9 @@ private:
 public:
   Rule(rule toConstruct);
   string toStr();
-  int size(){ return premises.size(); }
-  query premiseAt(int i) { return premises.at(i); }
+  int size() const { return premises.size(); }
+  query premiseAt(int i) const { return premises.at(i); }
   string name() { return conclusionName; }
   schema Conclusion() { return conclusion; }
+  bool causes(const Rule& toCompare);
 };

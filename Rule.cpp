@@ -18,3 +18,15 @@ string Rule::toStr() {
   prems.pop_back();
   return conclusionName + "(" + conclusion.toStr() + ") :- " + prems;
 }
+
+bool Rule::causes(const Rule& toCompare) {
+  for (int i = 0; i < toCompare.size(); i++) {
+    cout << "is " << conclusionName << " == " << toCompare.premiseAt(i).Name() << "?" << endl;
+    if (conclusionName == toCompare.premiseAt(i).Name()) {
+      cout << "Yes, it causes" << endl;
+      return true;
+    }
+  }
+  cout << "No, it doesn't cause" << endl;
+  return false;
+}
