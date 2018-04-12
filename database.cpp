@@ -97,28 +97,32 @@ relation database::evaluate(query q) {
 }
 
 string database::evaluate() {
-  cout << "************ TESTING GRAPH CONSTRUCTOR ***********" << endl;
   graph graphicus(rules);
   cout << graphicus.ToString() << endl;
   graphicus.findSCC();
-
   cout << "Rule Evaluation" << endl;
   int totaldifference;
   int passes = 0;
-  do {
-    totaldifference = 0;
-    for (unsigned int i = 0; i < relations.size(); i++){
-      totaldifference += relations.at(i).size();
+  for (int i = 0; i < graphicus.numSCC(); i++) {
+    set<int> scc = graphicus.getSCCAt(i);
+    if (scc.size() == 1 || graphicus.recursiveAt(*scc.begin())) {
+      //stuff!!!!!!!
     }
-    for (unsigned int i = 0; i < rules.size(); ++i) {
-      cout << rules.at(i).toStr() << endl;
-      getConclusion(i);
-    }
-    for (unsigned int i = 0; i < relations.size(); i++){
-      totaldifference -= relations.at(i).size();
-    }
-    passes++;
-  } while (totaldifference != 0);
+    else do {
+      totaldifference = 0;
+      for (unsigned int i = 0; i < relations.size(); i++) {
+        totaldifference += relations.at(i).size();
+      }
+      for (unsigned int i = 0; i < rules.size(); ++i) {
+        cout << rules.at(i).toStr() << endl;//change this loop
+        getConclusion(i);
+      }
+      for (unsigned int i = 0; i < relations.size(); i++) {
+        totaldifference -= relations.at(i).size();
+      }
+      passes++;
+    } while (totaldifference != 0);
+  }
   cout << endl <<  "Schemes populated after " << passes << " passes through the Rules." << endl;
   cout << endl << "Query Evaluation" << endl;
   string toReturn = "";
@@ -129,20 +133,14 @@ string database::evaluate() {
 }
 
 void database::getConclusion(int i) {
-  funcMeasure f1("getConclusion " + to_string(i) + " part one");
-  funcMeasure f2("getConclusion " + to_string(i) + " part two");
-  f1.flag();
   relation conclusions = evaluate(rules.at(i).premiseAt(0));
   for (int j = 1; j < rules.at(i).size(); ++j) {
     conclusions.join(evaluate(rules.at(i).premiseAt(j)));
   }
-  f1.flag();
-  f1.print();
   /*
   for each tuple in conclusions
     push_back a tuple into the relation matching conclusionName;
   */
-  f2.flag();
   for (unsigned int j = 0; j < relations.size(); j++){
     if (relations.at(j).Name() == rules.at(i).name()) {
 
@@ -155,18 +153,10 @@ void database::getConclusion(int i) {
       for (int k = 0; k < rules.at(i).Conclusion().size(); k++) {
         toProject.push_back(m[rules.at(i).Conclusion().at(k)]);
       }
-      f2.flag();
-      // for (int k = 0; k < conclusions.size(); k++) {
-      //   Tuple tmp = conclusions.at(k).project(toProject);
-      //   toPrint.addTuple(tmp);
-      // }
       toPrint = conclusions.project(toProject);
       toPrint.setHead(relations.at(j).getHead());
       //cout << toPrint.setDifference(relations.at(j)).toStr();     //UNCOMMENT ME FOR FULL PRODUCTION!!!
-      f2.flag();
       relations.at(j).addSet(toPrint);
-      f2.flag();
-      f2.printFull();
       break;
     }
   }

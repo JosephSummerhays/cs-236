@@ -18,4 +18,7 @@ public:
   graph(vector<Rule>& rules);
   void findSCC();
   string ToString();
+  int numSCC() { return SCCs.size(); }
+  getSCCAt(int i) { return SCCs.at(i); }
+  bool recursiveAt(int i) { return matrix[i][i]; }
 };

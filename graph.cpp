@@ -2,25 +2,15 @@
 
 graph::graph(vector<Rule>& rules) {
   size = rules.size();
-  //cout << "*** size = " << size << " ***" << endl;
   matrix = new bool*[size];
   for (int i = 0; i < size; i++) {
     matrix[i] = new bool[size];
   }
   for (int i = 0; i < size; i++) {
-    //cout << i << " --- i " << endl;
     for (int j = 0; j < size; j++) {
-      //cout << "checking if " << rules.at(i).name() << " causes " << rules.at(j).name() << endl;
       matrix[j][i] = rules.at(i).causes(rules.at(j));
     }
   }
-  //// for testing purposes only. delete shortly.
-  // for (int i = 0; i < size; i++) {
-  //   for (int j = 0; j < size; j++) {
-  //     cout << " " << matrix[i][j];
-  //   }
-  //   cout << endl;
-  // }
   visited.resize(size, false);
 }
 
@@ -31,15 +21,8 @@ void graph::findSCC() {
       DFSCausality(i);
     }
   }
-  // cout << "postOrder " << endl;
-  // for (unsigned int i = 0; i < postOrder.size(); i++) {
-  //   cout << " " << postOrder.at(i);
-  // }
-  // cout << endl;
-
   // GET SCCs
   resetVisited();
-  cout << postOrder.size() << "   size of postOrder" << endl;
   for (int i = postOrder.size() - 1; i >= 0; i--){
     if (!visited.at(postOrder.at(i))) {
       visited.at(postOrder.at(i)) = true;
@@ -68,7 +51,6 @@ void graph::DFSCausality(int col) {
 void graph::DFSFindSCC(int row) {
   for (int i = 0; i < size; i++) {
     if (matrix[row][i] && !visited.at(i)) {
-      //cout << "flag" << endl;
       visited.at(i) = true;
       DFSFindSCC(i);
     }
