@@ -1,4 +1,4 @@
-
+#|
 Schemes:
 A(X,Y)
 B(X,Y)
@@ -9,13 +9,50 @@ F(X,Y)
 G(X,Y)
 
 Facts:
+E('z','a').
+E('a','a').
+E('m','n').
+F('z','x').
+F('b','a').
+F('m','n').
+G('b','a').
+G('a','b').
+G('b','a').
+A('a','b').
+D('a','b').
+A('z','b').
+D('z','b').
 
 Rules:
 A(X,Y) :- B(X,Y), C(X,Y). # R0
 B(X,Y) :- A(X,Y), D(X,Y). # R1
 B(X,Y) :- B(Y,X).         # R2
 E(X,Y) :- F(X,Y), G(X,Y). # R3
-E(X,Y) :- E(X,Y), F(X,Y). # R4
+E(Y,Y) :- E(X,Y), F(X,Y). # R4
 
 Queries:
   A(x,b)?
+|#
+# long-running input for CS 236 Lab 4
+# takes about 1 minute without valgrind
+
+
+Schemes:
+A(a,b,c,d,e)
+
+
+Facts:
+A('a','b','c','d','e').
+# Comment the next fact to half the size
+A('f','g','h','i','j').
+
+
+Rules:
+A(a,b,c,d,e) :- A(e,d,c,b,a).
+A(a,b,c,f,g) :- A(a,b,c,d,e),A(e,d,c,f,g).
+A(a,b,c,d,e) :- A(b,c,d,e,a).
+A(a,b,c,d,e) :- A(b,a,c,d,e).
+
+
+Queries:
+A(a,b,c,d,e)?

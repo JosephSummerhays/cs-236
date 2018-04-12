@@ -100,30 +100,40 @@ string database::evaluate() {
   graph graphicus(rules);
   cout << graphicus.ToString() << endl;
   graphicus.findSCC();
-  cout << "Rule Evaluation" << endl;
+  cout << endl << "Rule Evaluation" << endl;
   int totaldifference;
-  int passes = 0;
   for (int i = 0; i < graphicus.numSCC(); i++) {
+    int passes = 0;
     set<int> scc = graphicus.getSCCAt(i);
-    if (scc.size() == 1 || graphicus.recursiveAt(*scc.begin())) {
-      //stuff!!!!!!!
+    string tmp = "";
+    for(set<int>::iterator it = scc.begin(); it != scc.end(); it++) {
+      tmp += "R" + to_string(*it) + ",";
+    }
+    tmp.pop_back();
+    cout << "SCC: " << tmp << endl;
+    if (scc.size() == 1 && !graphicus.recursiveAt(*scc.begin())) {
+      cout << rules.at(*scc.begin()).toStr() << endl;
+
+      getConclusion(*scc.begin());
+      passes++;
     }
     else do {
       totaldifference = 0;
       for (unsigned int i = 0; i < relations.size(); i++) {
         totaldifference += relations.at(i).size();
       }
-      for (unsigned int i = 0; i < rules.size(); ++i) {
-        cout << rules.at(i).toStr() << endl;//change this loop
-        getConclusion(i);
+      for(set<int>::iterator it = scc.begin(); it != scc.end(); it++) {
+        cout << rules.at(*it).toStr() << endl;
+        getConclusion(*it);
       }
       for (unsigned int i = 0; i < relations.size(); i++) {
         totaldifference -= relations.at(i).size();
       }
       passes++;
     } while (totaldifference != 0);
+    cout << passes << " passes: " << tmp << endl;
   }
-  cout << endl <<  "Schemes populated after " << passes << " passes through the Rules." << endl;
+  //cout << endl <<  "Schemes populated after " << passes << " passes through the Rules." << endl;
   cout << endl << "Query Evaluation" << endl;
   string toReturn = "";
   for (unsigned int i = 0; i < queries.size(); i++) {
@@ -155,7 +165,7 @@ void database::getConclusion(int i) {
       }
       toPrint = conclusions.project(toProject);
       toPrint.setHead(relations.at(j).getHead());
-      //cout << toPrint.setDifference(relations.at(j)).toStr();     //UNCOMMENT ME FOR FULL PRODUCTION!!!
+      cout << toPrint.setDifference(relations.at(j)).toStr();     //UNCOMMENT ME FOR FULL PRODUCTION!!!
       relations.at(j).addSet(toPrint);
       break;
     }

@@ -19,6 +19,7 @@ public:
   void findSCC();
   string ToString();
   int numSCC() { return SCCs.size(); }
-  getSCCAt(int i) { return SCCs.at(i); }
+  set<int> getSCCAt(int i) { return SCCs.at(i); }
   bool recursiveAt(int i) { return matrix[i][i]; }
+  ~graph();
 };

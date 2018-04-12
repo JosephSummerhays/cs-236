@@ -11,6 +11,8 @@
 using namespace std;
 
 int main (int argNum, char* args[]) {
+  funcMeasure x("main");
+  x.flag();
   dataLog dataLoggicus (args[1]);
   try {
     dataLoggicus.build();
@@ -21,6 +23,7 @@ int main (int argNum, char* args[]) {
     cout << "Failure!" << endl;
     cout << "   " << err << endl;
   }
-
+  x.flag();
+  x.print();
   return 0;
 }
